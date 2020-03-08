@@ -47,7 +47,10 @@ return [
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
-        ], 
+        ],
+        'cache' => [
+            'class' => 'yii\caching\ApcCache',
+        ],
         
         
  

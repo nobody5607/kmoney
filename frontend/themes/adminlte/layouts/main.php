@@ -103,7 +103,7 @@ $baseUrl = $this->theme->baseUrl;
 <!--                            </div>-->
 <!--                        </li>-->
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= Url::to(['user/settings/profile'])?>"><i
+                            <a class="nav-link" href="<?= Url::to(['/user/settings/profile?active=profile'])?>"><i
                                         class="fas fa-cog"></i></a>
                         </li>
 
