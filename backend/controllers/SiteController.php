@@ -76,6 +76,11 @@ class SiteController extends Controller
         return $this->render('contact');
  
     }
+    public function actionHelp()
+    {
+        return $this->render('help');
+
+    }
     
     public function actionEdit()
     {
