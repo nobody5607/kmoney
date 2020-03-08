@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use appxq\sdii\utils\VarDumper;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -82,6 +83,7 @@ class SiteController extends Controller
        $model = \common\models\Options::find()->where('label=:label',[
            ':label'=>$params
        ])->one();
+
        if($model->load(Yii::$app->request->post()) && $model->save()){
            return \cpn\chanpan\classes\CNMessage::getSuccess('Success');
        }
