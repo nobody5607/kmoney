@@ -5,7 +5,8 @@
 
 <?=  \appxq\sdii\widgets\ModalForm::widget([
     'id' => 'modal-options',
-    'options'=>['tabindex' => false], 
+    'options'=>['tabindex' => false],
+    'size'=>'modal-lg'
 ]);
 ?>
 

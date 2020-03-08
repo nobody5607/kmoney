@@ -39,7 +39,7 @@ class AppComponent extends Component {
                     ['label' => 'จัดการธนาคาร', 'icon' => 'bank', 'url' => ['/bank']],
                     ['label' => 'เกี่ยวกับเรา', 'icon' => 'info-circle', 'url' => ['/site/about']],
                     ['label' => 'ติดต่อเรา', 'icon' => 'volume-control-phone', 'url' => ['/site/contact']],
-                    ['label' => 'ความช่วยเหลือ', 'icon' => 'volume-control-phone', 'url' => ['/site/help']],
+                    ['label' => 'ความช่วยเหลือ', 'icon' => 'question-circle', 'url' => ['/site/help']],
 
                     ///sell-shipping
                     [
