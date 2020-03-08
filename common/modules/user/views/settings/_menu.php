@@ -18,11 +18,12 @@ use dektrium\user\widgets\UserMenu;
 
 $user = Yii::$app->user->identity;
 ?>
-<div class="panel panel-default">
-    <div class="panel-heading">
-       <?= $user->profile->firstname . ' ' . $user->profile->lastname ?>
-    </div>
-    <div class="panel-body">
-        <?= UserMenu::widget() ?> 
-    </div>
-</div>
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <a class="nav-link <?= isset($_GET['active'])&&$_GET['active'] == 'account' ? 'active': ''?> " href="<?= \yii\helpers\Url::to(['/user/settings/account?active=account']);?>">บัญชี</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link <?= isset($_GET['active'])&&$_GET['active'] == 'profile' ? 'active': ''?>" href="<?= \yii\helpers\Url::to(['/user/settings/profile?active=profile']);?>">โปรไฟล์</a>
+    </li>
+
+</ul>

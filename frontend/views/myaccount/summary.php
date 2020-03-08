@@ -23,9 +23,9 @@ $this->title ='สรุป';
                             </div>
 
                             <div >
-                                <h2>
-                                    ฿<?= number_format($total, 2)?>
-                                </h2>
+                                <h1>
+                                    <label>฿<?= number_format($total, 2)?></label>
+                                </h1>
                             </div>
 
 
@@ -35,7 +35,7 @@ $this->title ='สรุป';
                 <div class="col-md-4 ml-3 mb-3 mr-3">
                     <div class="">
                         <?php
-                        $storageUrl = isset(\Yii::$app->params['storageUrl'])?\Yii::$app->params['storageUrl']:'';
+                         $storageUrl = isset(\Yii::$app->params['storageUrl'])?\Yii::$app->params['storageUrl']:'';
                         ?>
                         <div class="row">
                             <div class="col-6 col-sm-6 mt-3">
@@ -94,7 +94,7 @@ $this->title ='สรุป';
                 </div>
                 <div class="col-md-4 mt-3 ml-3">
 
-                    <h4>บัญชีธนาคาร</h4>
+                    <h5>บัญชีธนาคาร</h5>
 
                     <div>
                         <div >

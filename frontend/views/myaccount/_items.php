@@ -1,7 +1,7 @@
 <div class="media" data-url="<?= \yii\helpers\Url::to(['/myaccount/transaction-detail?id='.$v->id])?>">
     <div class="media-body">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2" style="line-height: 50px;">
                 <?php
                     echo \appxq\sdii\utils\SDdate::mysql2phpThDateSmall($v->create_date);
                 ?>
