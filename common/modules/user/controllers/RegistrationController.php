@@ -11,8 +11,11 @@
 
 namespace common\modules\user\controllers;
 
+use appxq\sdii\utils\VarDumper;
+use common\modules\user\models\Profile;
 use dektrium\user\controllers\RegistrationController as BaseRegistrationController;
 use common\modules\user\models\RegistrationForm;
+use mdm\admin\models\User;
 use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
 use Yii;
@@ -48,18 +51,49 @@ class RegistrationController extends BaseRegistrationController
 
         $model = \Yii::createObject(RegistrationForm::className());
         //$this->performAjaxValidation($model);
+//        VarDumper::dump($model);
 
         if ($model->load(\Yii::$app->request->post())) { 
             $username = isset($_POST['register-form']['username']) ? $_POST['register-form']['username'] : '';
             $email = isset($_POST['register-form']['email']) ? $_POST['register-form']['email'] : '';
-            
+
+
             if(\common\modules\user\classes\CNUserFunc::checkUser('username', $username)){                
                \Yii::$app->session->setFlash('error', Yii::t('user', 'This username has already been taken'));
             }            
             if(\common\modules\user\classes\CNUserFunc::checkUser('email', $email)){
                 \Yii::$app->session->setFlash('error', Yii::t('user', 'This email address has already been taken'));
-            }            
+            }
+            //VarDumper::dump(\Yii::$app->request->post());
             if($model->register()){
+                $user = User::find()->where('email=:email',[':email'=>$email])->one();
+                if($user){
+                    $profile = Profile::find()->where('user_id=:user_id',[':user_id'=>$user->id])->one();
+                    $lineToken=NULL;
+                    $accountName=NULL;
+                    $accountNumber=NULL;
+                    $bank = NULL;
+                    $post = \Yii::$app->request->post('register-form');
+                    if(isset($post['lineToken'])){
+                        $lineToken = $post['lineToken'];
+                    }
+                    if(isset($post['accountNumber'])){
+                        $accountNumber = $post['accountNumber'];
+                    }
+                    if(isset($post['accountName'])){
+                        $accountName = $post['accountName'];
+                    }
+                    if(isset($post['bank'])){
+                        $bank = $post['bank'];
+                    }
+                    $profile->lineToken=$lineToken;
+                    $profile->accountNumber=$accountNumber;
+                    $profile->accountName=$accountName;
+                    $profile->bank=$bank;
+                    if(!$profile->save()){
+                        VarDumper::dump($profile->errors);
+                    }
+                }
                 return $this->render('message', [
                     'title'  => \Yii::t('chanpan', 'A message has been sent to your email address. It contains a confirmation link that you must click to complete registration.'),
                     'module' => $this->module,

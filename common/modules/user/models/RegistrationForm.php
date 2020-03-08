@@ -1,5 +1,6 @@
 <?php
 namespace common\modules\user\models;
+use appxq\sdii\utils\VarDumper;
 use dektrium\user\models\RegistrationForm as BaseRegistrationForm;
 use Yii;
 use common\modules\user\models\User;
@@ -10,6 +11,9 @@ class RegistrationForm extends BaseRegistrationForm{
     public $lastname;
     public $telephone;
     public $confirm_password;
+    public $lineToken;
+    public $accountNumber;
+    public $bank, $accountName;
     public function rules()
     {
          $user = $this->module->modelMap['User'];
@@ -29,7 +33,12 @@ class RegistrationForm extends BaseRegistrationForm{
          
          $rules[] = ['firstname', 'required'];
          $rules[] = ['lastname', 'required'];
-         $rules[] = ['telephone', 'required'];         
+         $rules[] = ['telephone', 'required'];
+         $rules[] = ['bank','required'];
+         $rules[] = ['accountNumber','required'];
+         $rules[] = ['accountName','required'];
+
+         $rules[] = ['lineToken', 'string', 'min' => 1, 'max' => 255];
         // $rules[]=[['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(), 'secret' => '6LeaIl4UAAAAAB2xHY6p9L9lHf00NqsuapdQBhfT', 'uncheckedMessage' => 'Please confirm that you are not a bot.'];
          //$rules[]=['reCaptcha', 'safe'];
          return $rules;
@@ -41,9 +50,13 @@ class RegistrationForm extends BaseRegistrationForm{
         $labels['lastname'] = Yii::t('chanpan', 'นามสกุล'); 
 	
         $labels['confirm_password']=Yii::t('chanpan', 'ยืนยันรหัสผ่าน');
-        $labels['telephone']=Yii::t('appmenu', 'Telephone');
-       
-        
+        $labels['accountNumber']=Yii::t('appmenu', 'หมายเลขบัญชี');
+        $labels['lineToken']=Yii::t('appmenu', 'Line token');
+        $labels['telephone'] = 'เบอร์โทรศัพท์';
+        $labels['bank'] = 'เลือกธนาคาร';
+        $labels['accountName'] = 'ชื่อบัญชี';
+
+
         return $labels;
     }
     public function register()
@@ -59,25 +72,25 @@ class RegistrationForm extends BaseRegistrationForm{
             'username' => $this->username,
             'password' => $this->password
             ]);
-            
-	/** @var Profile $profile */
         $profile = \Yii::createObject(Profile::className());
         $profile->setAttributes([
-            //'cid' => $this->cid,
-	    'name' => $this->firstname.' '.$this->lastname,
-	    'public_email' => $this->email,
-	    'gravatar_email' => $this->email,
+            'name' => $this->firstname.' '.$this->lastname,
+            'public_email' => $this->email,
+            'gravatar_email' => $this->email,
             'dob'=>' ',//$this->dob,
             'firstname'=>$this->firstname,
             'lastname'=>$this->lastname,             
             'department'=>'00',//$this->department,
             'position'=>'0',
             'sitecode'=>'00',//$this->sitecode,
-            'tel'=> ' ',//$this->telephone
-             
-            
-        ]); 
-	$user->modelProfile = $profile;
+            'tel'=> $this->telephone,//$this->telephone
+            'lineToken'=>$this->lineToken,
+            'accountNumber'=>$this->accountNumber,
+            'bank'=>$this->bank,
+            'accountName'=>$this->accountName
+        ]);
+
+	    $user->modelProfile = $profile;
 	
         return $user->register();
     }

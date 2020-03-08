@@ -12,9 +12,20 @@ class AppComponent extends Component {
         parent::init(); 
         $params = \backend\modules\core\classes\CoreQuery::getOptionsParams();
         \Yii::$app->params = \yii\helpers\ArrayHelper::merge(\Yii::$app->params, $params);
+
+
+        // Url Aliases
+        if(isset(Yii::$app->params['storageUrl'])){
+            $storageUrl = Yii::$app->params['storageUrl'];
+        }
+        Yii::setAlias('@storageUrl', $storageUrl);
+
         //\appxq\sdii\utils\VarDumper::dump($params);
     }
     public static function navbarLeft() {
+        Yii::$app->language = 'th-TH';
+
+
         $moduleId = (isset(Yii::$app->controller->module->id) && Yii::$app->controller->module->id != 'app-backend') ? Yii::$app->controller->module->id : '';
         $controllerId = isset(Yii::$app->controller->id) ? Yii::$app->controller->id : '';
         $actionId = isset(Yii::$app->controller->action->id) ? Yii::$app->controller->action->id : '';
@@ -23,25 +34,20 @@ class AppComponent extends Component {
         $navbar = [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
-                    ['label' => \Yii::t('appmenu','Home'), 'icon' => 'home', 'url' => ['/']],
-                    ['label' => \Yii::t('appmenu','About'), 'icon' => '', 'url' => ['/site/about']],
-                    ['label' => \Yii::t('appmenu','Contact'), 'icon' => '', 'url' => ['/site/contact']],
+                    ['label' => 'สรุป', 'icon' => 'home', 'url' => ['/']],
+                    ['label' => 'รายการฝากถอน', 'icon' => 'money', 'url' => ['/moneys']],
+                    ['label' => 'จัดการธนาคาร', 'icon' => 'bank', 'url' => ['/bank']],
+                    ['label' => 'เกี่ยวกับเรา', 'icon' => 'info-circle', 'url' => ['/site/about']],
+                    ['label' => 'ติดต่อเรา', 'icon' => 'volume-control-phone', 'url' => ['/site/contact']],
 
-                    ['label' => \Yii::t('appmenu','จัดการบิล'), 'icon' => '', 'url' => ['/bill-items'],'visible' => \Yii::$app->user->can('billmanager'),],
-                    ['label' => \Yii::t('appmenu','จัดสินค้า'), 'icon' => '', 'url' => ['/bill-items'],'visible' => \Yii::$app->user->can('packager'),],
-                    ['label' => \Yii::t('appmenu','ส่งสินค้า'), 'icon' => '', 'url' => ['/bill-items'],'visible' => \Yii::$app->user->can('shipping'),],
-                    ['label' => \Yii::t('appmenu','เก็บเงิน'), 'icon' => '', 'url' => ['/bill-items'],'visible' => \Yii::$app->user->can('chargers'),],
-
-                    ['label' => \Yii::t('appmenu','Sell Shipping'), 'icon' => '', 'url' => ['/sell-shipping']],
-                    ['label' => \Yii::t('appmenu','Informations'), 'icon' => '', 'url' => ['/informations']],
                     ///sell-shipping
                     [
-                        'label' => Yii::t('appmenu','Member Management'), 
+                        'label' => 'สมาชิก',
                         'icon' => 'users', 'url' => ['/user/admin/index'],
                         'visible' => \Yii::$app->user->can('admin')
                     ],
                     [
-                        'label' => Yii::t('appmenu', 'System Config'),
+                        'label' => 'ตั้งค่าระบบ',
                         'visible' => \Yii::$app->user->can('admin'),
                         'icon' => 'cog',
                         'url' => '#',

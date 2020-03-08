@@ -1,12 +1,12 @@
 <div class="media" data-url="<?= \yii\helpers\Url::to(['/myaccount/transaction-detail?id='.$v->id])?>">
     <div class="media-body">
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <?php
                     echo \appxq\sdii\utils\SDdate::mysql2phpThDateSmall($v->create_date);
                 ?>
             </div>
-            <div class="col-md-11">
+            <div class="col-md-10">
                 <h3 class="dropdown-item-title">
 
                     <h5>
@@ -25,7 +25,7 @@
                         }
                     ?>
                     <span class="float-right text-sm <?= $textStatus; ?>">
-                         + <?= number_format($v->amount)?>
+                         + ฿<?= number_format($v->amount)?>
                         <?php
                         if( $v->approved == 'approved' )
                         {

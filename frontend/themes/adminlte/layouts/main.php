@@ -37,7 +37,16 @@ $baseUrl = $this->theme->baseUrl;
                 <div class="container">
                     <a href="<?= Url::to(['/myaccount/summary'])?>" class="navbar-brand">
 
-                        <span class="brand-text font-weight-light">AdminLTE 3</span>
+                        <span class="brand-text font-weight-light">
+                            <?php
+                                $nameApp ='';
+                                if(isset(Yii::$app->params['name_app'])){
+                                    $nameApp = Yii::$app->params['name_app'];
+                                }
+
+                                echo $nameApp;
+                            ?>
+                        </span>
                     </a>
 
                     <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,32 +76,32 @@ $baseUrl = $this->theme->baseUrl;
                     <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                         <!-- Messages Dropdown Menu -->
                         <!-- Notifications Dropdown Menu -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" data-toggle="dropdown" href="#">
-                                <i class="far fa-bell"></i>
-                                <span class="badge badge-warning navbar-badge">15</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                <span class="dropdown-header">15 Notifications</span>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item">
-                                    <i class="fas fa-envelope mr-2"></i> 4 new messages
-                                    <span class="float-right text-muted text-sm">3 mins</span>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item">
-                                    <i class="fas fa-users mr-2"></i> 8 friend requests
-                                    <span class="float-right text-muted text-sm">12 hours</span>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item">
-                                    <i class="fas fa-file mr-2"></i> 3 new reports
-                                    <span class="float-right text-muted text-sm">2 days</span>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                            </div>
-                        </li>
+<!--                        <li class="nav-item dropdown">-->
+<!--                            <a class="nav-link" data-toggle="dropdown" href="#">-->
+<!--                                <i class="far fa-bell"></i>-->
+<!--                                <span class="badge badge-warning navbar-badge">15</span>-->
+<!--                            </a>-->
+<!--                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">-->
+<!--                                <span class="dropdown-header">15 Notifications</span>-->
+<!--                                <div class="dropdown-divider"></div>-->
+<!--                                <a href="#" class="dropdown-item">-->
+<!--                                    <i class="fas fa-envelope mr-2"></i> 4 new messages-->
+<!--                                    <span class="float-right text-muted text-sm">3 mins</span>-->
+<!--                                </a>-->
+<!--                                <div class="dropdown-divider"></div>-->
+<!--                                <a href="#" class="dropdown-item">-->
+<!--                                    <i class="fas fa-users mr-2"></i> 8 friend requests-->
+<!--                                    <span class="float-right text-muted text-sm">12 hours</span>-->
+<!--                                </a>-->
+<!--                                <div class="dropdown-divider"></div>-->
+<!--                                <a href="#" class="dropdown-item">-->
+<!--                                    <i class="fas fa-file mr-2"></i> 3 new reports-->
+<!--                                    <span class="float-right text-muted text-sm">2 days</span>-->
+<!--                                </a>-->
+<!--                                <div class="dropdown-divider"></div>-->
+<!--                                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>-->
+<!--                            </div>-->
+<!--                        </li>-->
                         <li class="nav-item">
                             <a class="nav-link" href="<?= Url::to(['user/settings/profile'])?>"><i
                                         class="fas fa-cog"></i></a>
@@ -125,14 +134,24 @@ $baseUrl = $this->theme->baseUrl;
 
             <!-- Main Footer -->
             <footer class="main-footer">
-                <!-- To the right -->
                 <div class="float-right d-none d-sm-inline">
-                    Anything you want
+                    <?= isset(Yii::$app->params['footer'])?Yii::$app->params['footer']:''?>
                 </div>
-                <!-- Default to the left -->
-                <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
             </footer>
         </div>
+        <?php \appxq\sdii\widgets\CSSRegister::begin()?>
+        <style>
+            .navbar-lightblue {
+                background-color: #20c997;
+            }
+            .btn-success {
+                color: #fff;
+                background-color: #20c997;
+                border-color: #20c997;
+                box-shadow: none;
+            }
+        </style>
+        <?php \appxq\sdii\widgets\CSSRegister::end()?>
         <?php $this->endBody() ?>
     </body>
 </html>

@@ -22,7 +22,7 @@ class AppComponent extends Component {
         Yii::setAlias('frontendUrl',$frontendUrl);
         $params = CoreQuery::getOptionsParams();
         Yii::$app->params = \yii\helpers\ArrayHelper::merge(Yii::$app->params, $params);
-//        VarDumper::dump(Yii::$app->params);
+        //VarDumper::dump(Yii::$app->params);
         //\appxq\sdii\utils\VarDumper::dump(\appxq\sdii\utils\SDUtility::string2Array(Yii::$app->params['brand_file_type']));
     }
     

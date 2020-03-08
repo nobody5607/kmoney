@@ -99,12 +99,25 @@ $this->title ='สรุป';
                     <div>
                         <div >
                             <div class="media">
-                                <img src="https://lh3.googleusercontent.com/fRj3gVsSGNq1izt8NON0l6Cdqt2dEK4IRhInLoPLlunZMCA0wwOmVnaeDYQEZ8ejWQ" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                <?php
+//                                \appxq\sdii\utils\VarDumper::dump($bank);
+                                    if($bank['image']){
+                                        echo "<img class='img-size-50 mr-3 img-circle' src='{$storageUrl}/uploads/{$bank->image}'>";
+                                    }
+                                ?>
+
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
-                                        793-272636-8 ไทยพาณิชย์
                                     </h3>
-                                    <p class="text-sm">นาย ณัฐพล จันทร์ปาน</p>
+                                    <p class="text-sm">
+                                        <?php
+                                            echo "{$user['accountNumber']} {$bank['name']}";
+                                            echo '<br>';
+                                            echo $user['accountName'];
+                                            //\appxq\sdii\utils\VarDumper::dump($bank);
+
+                                        ?>
+                                    </p>
                                 </div>
                             </div>
 

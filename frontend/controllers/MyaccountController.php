@@ -7,6 +7,7 @@ namespace frontend\controllers;
 use appxq\sdii\utils\SDdate;
 use appxq\sdii\utils\VarDumper;
 use backend\classes\CNUser;
+use backend\models\Bank;
 use cpn\chanpan\classes\CNMessage;
 use frontend\classest\CNMoney;
 use frontend\models\Moneys;
@@ -36,13 +37,18 @@ class MyaccountController extends Controller
         $total = 0;
         $inAmount = $amounts['inamount'];
         $outAmount = $amounts['outmoney'];
-
         $total = $inAmount-$outAmount;
+        $user_id = CNUser::get_id();
+        $user = CNUser::get_user_by_id($user_id);
+        $bank = Bank::findOne($user['bank']);
+//        VarDumper::dump($bank);
 
         //VarDumper::dump($moneys);
         return $this->render("summary",[
             'moneys'=>$moneys,
-            'total'=>$total
+            'total'=>$total,
+            'user'=>$user,
+            'bank'=>$bank
         ]);
     }
 

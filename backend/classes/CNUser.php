@@ -8,6 +8,8 @@
 
 namespace backend\classes;
 
+use appxq\sdii\utils\VarDumper;
+
 /**
  * Description of CNUser
  *
@@ -50,6 +52,24 @@ class CNUser {
             return false;
      }
   }
+
+    public static function getFullNameById($userID){
+        try{
+            $user = self::get_user_by_id($userID);
+            $name=[];
+
+            if(isset($user['firstname'])){
+                $name['fname']=$user['firstname'];
+            }
+            if(isset($user->lastname)){
+                $name['lname']=$user['lastname'];
+            }
+
+            return join(" ",$name);
+        } catch (Exception $ex) {
+            return false;
+        }
+    }
   
   
 }

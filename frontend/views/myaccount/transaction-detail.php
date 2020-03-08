@@ -59,7 +59,7 @@
                         </label>
                         <label class="text-sm <?= $textStatus; ?>">
 
-                              + <?= number_format($v->amount)?>
+                              + ฿<?= number_format($v->amount)?>
                             <?php
                             if( $v->approved == 'approved' )
                             {

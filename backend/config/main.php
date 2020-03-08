@@ -11,7 +11,7 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'language' => 'en-US',
+    'language' => 'th-TH',
     'timeZone' => 'Asia/Bangkok',
     'bootstrap' => ['log',
         'backend\components\AppComponent',

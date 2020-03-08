@@ -11,14 +11,14 @@ $baseUrl = $this->theme->baseUrl;
 ?>
  
 <?php
-//// if (Yii::$app->controller->action->id === 'login') { 
-// 
-////     echo $this->render(
-////         'main',
-////         ['content' => $content]
-////     );
-//// } else {
+$actionArr = ['security','registration','recovery'];
+if (in_array(Yii::$app->controller->id, $actionArr)) {
 
+    echo $this->render(
+        'main-login',
+        ['content' => $content]
+    );
+} else {
     if (class_exists('backend\assets\AppAsset')) {
         backend\assets\AppAsset::register($this);
     } else {
@@ -72,4 +72,4 @@ $baseUrl = $this->theme->baseUrl;
     </body>
     </html>
     <?php $this->endPage() ?>
-<?php  // } ?>
+<?php   } ?>

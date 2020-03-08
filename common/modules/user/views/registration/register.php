@@ -10,7 +10,7 @@
  */
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap4\ActiveForm;
  
 
 $this->title = Yii::t('user', 'Sign up');
@@ -61,9 +61,15 @@ $form = ActiveForm::begin([
                                 </div>
                             </div>
 
-                            <?= $form->field($model, 'telephone')->widget(\yii\widgets\MaskedInput::className(), [
-                                'mask' => '9999999999',
-                            ]) ?>
+                            <?= $form->field($model, 'telephone')->textInput() ?>
+
+                            <?= $form->field($model, 'bank')
+                                ->dropDownList(\yii\helpers\ArrayHelper::map(\backend\models\Bank::find()->all(),'id','name'),[
+                                        'prompt'=>'เลือกธนาคาร...'
+                                ]) ?>
+                            <?= $form->field($model, 'accountNumber') ?>
+                            <?= $form->field($model, 'accountName') ?>
+                            <?= $form->field($model, 'lineToken')->hiddenInput()->label(false) ?>
                             <?= Html::submitButton(Yii::t('user', 'Sign up'), ['class' => 'btn btn-success btn-block', 'id'=>'btnSubmit']) ?>
 
 
